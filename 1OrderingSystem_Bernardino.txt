@@ -1,0 +1,800 @@
+/* CREATE DATABASE NAMED ORDERING SYSTEM*/
+
+CREATE DATABASE OrderingSystem
+
+
+/* CREATE TABLE NAMED CUSTOMERS*/
+
+CREATE TABLE Customers (CustomerID INT PRIMARY KEY AUTO_INCREMENT,Firstname VARCHAR(255), Surname VARCHAR(255))
+
+
+/* CREATE TABLE NAMED COUNTRIES*/
+
+CREATE TABLE Countries (CountriesID INT PRIMARY KEY AUTO_INCREMENT,Country_name VARCHAR(255), Country_Capital VARCHAR(255))
+
+
+/* CREATE TABLE NAMED PROVINCES*/
+
+CREATE TABLE Provinces (ProvinceID INT PRIMARY KEY AUTO_INCREMENT,Province_name VARCHAR(255), Province_Capital VARCHAR(255))
+
+
+/* CREATE TABLE NAMED CITIES*/
+
+CREATE TABLE Cities (CityID INT PRIMARY KEY AUTO_INCREMENT,City_name VARCHAR(255))
+
+
+/* START OF RECORD FOR CUSTOMER*/
+
+INSERT INTO Customers (CustomerID,FIRSTNAME, Surname)
+VALUES (1000,'CARLO', 'BERNARDINO'),
+
+/* INSERTION OF RECORDS FOR FN SN*/
+/* NOTE: PRIMARY IS AUTO_INCREMENT */
+
+INSERT INTO Customers (FIRSTNAME, Surname)
+VALUES ('PEDRO', 'PENDUKO'),
+       ('CARDO', 'DALISAY'),
+       ('BON','JOVI'),
+       ('MICHAEL','JORDAN'),
+       ('JORDAN','POOLE'),
+       ('ENTENG','KABISOTE'),
+       ('CELINE','DELAVIN'),
+       ('ARA','GONZALES'),
+       ('NETNET','OLIVARES')
+       
+       
+/* START OF RECORD FOR COUNTRIES*/
+
+INSERT INTO Countries (CountriesID, Country_name, Country_Capital)
+VALUES (2000,'Bahamas', 'Nassau')
+
+
+/* INSERTION OF RECORDS FOR FN SN*/
+/* NOTE: PRIMARY IS AUTO_INCREMENT */
+
+INSERT INTO Countries (Country_name, Country_Capital)
+VALUES ('Maldives', 'Malé'),
+	('Malaysia','Kuala Lumpur'),
+	('Venezuela','Caracas'),
+	('Colombia','Bogota'),
+	('Guatemala','Guatemala City'),
+	('Russia','Moscow'),
+	('Belgium','Brussels'),
+	('Germany','Berlin'),
+	('Spain','Madrid')
+	
+
+
+/* START OF RECORD FOR PROVINCES*/
+
+INSERT INTO Provinces (ProvinceID, Province_name, Province_Capital)
+VALUES (3000,'', 'Nassau')
+
+/* INSERTION OF RECORDS FOR FN SN*/
+/* NOTE: PRIMARY IS AUTO_INCREMENT */
+
+INSERT INTO Provinces (Province_name, Province_Capital)
+VALUES ('', 'Brussels'),
+	('','Kuala Lumpur'),
+	('','Guatemala City'),
+	('Northern European Lowlands','Berlin'),
+	('','Moscow'),
+	('','Malé'),
+	('Madrid Provincia','Madrid'),
+	('Nueva Granada','Caracas'),
+	('','Bogota')
+
+
+/* START OF RECORD FOR COUNTRIES*/
+
+INSERT INTO Cities (CityID, City_name)
+VALUES (4000,'Berlin')
+
+/* INSERTION OF RECORDS FOR FN SN*/
+/* NOTE: PRIMARY IS AUTO_INCREMENT */
+
+INSERT INTO Cities (City_name)
+VALUES ('Berlin'),
+       ('Moscow'),
+       ('Guatemala City'),
+       ('Bogota'),
+       ('Kuala Lumpur'),
+       ('Madrid'),
+       ('Nassau'),
+       ('Malé'),
+       ('Caracas')
+       
+
+/*SELECT STATEMENT WITH WHERE CLAUSE EXAMPLES*/
+SELECT Firstname AS Pangalan, Surname AS Apelyido
+FROM customers
+WHERE customerID = 1000 OR customerID= 1009
+
+SELECT country_name, country_capital
+FROM countries
+WHERE countriesID = 2005 
+
+SELECT country_name, country_capital
+FROM countries
+WHERE countriesID = 2005 
+
+SELECT province_capital
+FROM provinces
+WHERE province_name = 'nueva granada'
+
+SELECT city_name
+FROM cities
+WHERE cityID = '4002'
+
+
+/*RUN TABLE CUSTOMERS*/
+
+SELECT *
+FROM customers
+
+
+/*RUN TABLE COUNTRIES*/
+
+SELECT *
+FROM countries
+
+
+/*RUN TABLE PROVINCES*/
+
+SELECT *
+FROM provinces
+
+
+/*RUN TABLE CITIES*/
+
+SELECT *
+FROM cities
+
+/*************************************************************************************************/
+
+/*ADDING GENDER FIELDNAME*/
+
+ALTER TABLE customers
+ADD gender VARCHAR (255) DEFAULT 'Male' 
+
+
+UPDATE customers
+SET gender = 'Female'
+WHERE customerID = 1007
+
+UPDATE customers
+SET gender = 'Female'
+WHERE customerID = 1008
+
+UPDATE customers
+SET gender = 'Female'
+WHERE customerID = 1009
+
+
+/* ADDING FOREIGN KEYS IN PROVINCES TABLE*/
+
+ALTER TABLE provinces
+ADD countriesID INT
+
+ALTER TABLE provinces
+ADD FOREIGN KEY (countriesID)
+REFERENCES COUNTRIES (countriesID)
+
+UPDATE PROVINCES
+SET countriesID = 2000
+WHERE provinceID = 3000
+
+UPDATE PROVINCES
+SET countriesID = 2007
+WHERE provinceID = 3001
+
+UPDATE PROVINCES
+SET countriesID = 2002
+WHERE provinceID = 3002
+
+UPDATE PROVINCES
+SET countriesID = 2005
+WHERE provinceID = 3003
+
+UPDATE PROVINCES
+SET countriesID = 2008
+WHERE provinceID = 3004
+
+UPDATE PROVINCES
+SET countriesID = 2006
+WHERE provinceID = 3005
+
+UPDATE PROVINCES
+SET countriesID = 2001
+WHERE provinceID = 3006
+
+UPDATE PROVINCES
+SET countriesID = 2009
+WHERE provinceID = 3007
+
+UPDATE PROVINCES
+SET countriesID = 2003
+WHERE provinceID = 3008
+
+UPDATE PROVINCES
+SET countriesID = 2004
+WHERE provinceID = 3009
+
+
+/* ADDING FOREIGN KEYS IN CITIES TABLE*/
+
+ALTER TABLE cities
+ADD countriesID INT
+
+ALTER TABLE cities
+ADD FOREIGN KEY (countriesID)
+REFERENCES COUNTRIES (countriesID)
+
+UPDATE cities
+SET countriesID = 2008
+WHERE cityID = 4000
+
+UPDATE cities
+SET countriesID = 2007
+WHERE cityID = 4001
+
+UPDATE cities
+SET countriesID = 2006
+WHERE cityID = 4002
+
+UPDATE cities
+SET countriesID = 2005
+WHERE cityID = 4003
+
+UPDATE cities
+SET countriesID = 2004
+WHERE cityID = 4004
+
+UPDATE cities
+SET countriesID = 2002
+WHERE cityID = 4005
+
+UPDATE cities
+SET countriesID = 2009
+WHERE cityID = 4006
+
+UPDATE cities
+SET countriesID = 2000
+WHERE cityID = 4007
+
+UPDATE cities
+SET countriesID = 2001
+WHERE cityID = 4008
+
+UPDATE cities
+SET countriesID = 2003
+WHERE cityID = 4009
+
+
+ALTER TABLE cities
+ADD provinceID INT
+
+ALTER TABLE cities
+ADD FOREIGN KEY (provinceID)
+REFERENCES provinces (provinceID)
+
+UPDATE cities
+SET provinceID = 3004
+WHERE cityID = 4000
+
+UPDATE cities
+SET provinceID = 3001
+WHERE cityID = 4001
+
+UPDATE cities
+SET provinceID = 3005
+WHERE cityID = 4002
+
+UPDATE cities
+SET provinceID = 3003
+WHERE cityID = 4003
+
+UPDATE cities
+SET provinceID = 3009
+WHERE cityID = 4004
+
+UPDATE cities
+SET provinceID = 3002
+WHERE cityID = 4005
+
+UPDATE cities
+SET provinceID = 3007
+WHERE cityID = 4006
+
+UPDATE cities
+SET provinceID = 3000
+WHERE cityID = 4007
+
+UPDATE cities
+SET provinceID = 3006
+WHERE cityID = 4008
+
+UPDATE cities
+SET provinceID = 3008
+WHERE cityID = 4009
+
+/* ADDING FOREIGN KEYS IN CUSTOMERS TABLE*/
+
+ALTER TABLE customers
+ADD countriesID INT
+
+ALTER TABLE customers
+ADD FOREIGN KEY (countriesID)
+REFERENCES COUNTRIES (countriesID)
+
+UPDATE customers
+SET countriesID = 2000
+WHERE customerID = 1000
+
+UPDATE customers
+SET countriesID = 2001
+WHERE customerID = 1001
+
+UPDATE customers
+SET countriesID = 2007
+WHERE customerID = 1002
+
+UPDATE customers
+SET countriesID = 2002
+WHERE customerID= 1003
+
+UPDATE customers
+SET countriesID = 2006
+WHERE customerID = 1004
+
+UPDATE customers
+SET countriesID = 2003
+WHERE customerID = 1005
+
+UPDATE customers
+SET countriesID = 2004
+WHERE customerID = 1006
+
+UPDATE customers
+SET countriesID = 2008
+WHERE customerID = 1007
+
+UPDATE customers
+SET countriesID = 2005
+WHERE customerID = 1008
+
+UPDATE customers
+SET countriesID = 2009
+WHERE customerID = 1009
+
+
+ALTER TABLE customers
+ADD provinceID INT
+
+ALTER TABLE customers
+ADD FOREIGN KEY (provinceID)
+REFERENCES PROVINCES (provinceID)
+
+UPDATE customers
+SET provinceID = 3000
+WHERE customerID = 1000
+
+UPDATE customers
+SET provinceID = 3006
+WHERE customerID = 1001
+
+UPDATE customers
+SET provinceID = 3001
+WHERE customerID = 1002
+
+UPDATE customers
+SET provinceID = 3002
+WHERE customerID= 1003
+
+UPDATE customers
+SET provinceID = 3005
+WHERE customerID = 1004
+
+UPDATE customers
+SET provinceID = 3008
+WHERE customerID = 1005
+
+UPDATE customers
+SET provinceID = 3009
+WHERE customerID = 1006
+
+UPDATE customers
+SET provinceID = 3004
+WHERE customerID = 1007
+
+UPDATE customers
+SET provinceID = 3003
+WHERE customerID = 1008
+
+UPDATE customers
+SET provinceID = 3007
+WHERE customerID = 1009
+
+
+ALTER TABLE customers
+ADD cityID INT
+
+ALTER TABLE customers
+ADD FOREIGN KEY (cityID)
+REFERENCES cities (cityID)
+
+UPDATE customers
+SET cityID = 4007
+WHERE customerID = 1000
+
+UPDATE customers
+SET cityID = 4008
+WHERE customerID = 1001
+
+UPDATE customers
+SET cityID = 4001
+WHERE customerID = 1002
+
+UPDATE customers
+SET cityID = 4005
+WHERE customerID= 1003
+
+UPDATE customers
+SET cityID = 4002
+WHERE customerID = 1004
+
+UPDATE customers
+SET cityID = 4009
+WHERE customerID = 1005
+
+UPDATE customers
+SET cityID = 4004
+WHERE customerID = 1006
+
+UPDATE customers
+SET cityID = 4000
+WHERE customerID = 1007
+
+UPDATE customers
+SET cityID = 4003
+WHERE customerID = 1008
+
+UPDATE customers
+SET cityID = 4006
+WHERE customerID = 1009
+
+/****************************************************************************************/
+
+/*ADDING STATUS FIELDNAME*/
+
+ALTER TABLE customers
+ADD customer_status VARCHAR (255) DEFAULT 'Active' 
+
+ALTER TABLE countries
+ADD country_status VARCHAR (255) DEFAULT 'Good' 
+
+ALTER TABLE provinces
+ADD province_status VARCHAR (255) 
+
+ALTER TABLE cities
+ADD city_status VARCHAR (255) DEFAULT 'Good' 
+
+
+/*UPDATING STATUS*/
+
+UPDATE customers
+SET customer_status = 'Inactive'
+WHERE customerID = 1002
+
+UPDATE customers
+SET customer_status = 'Inactive'
+WHERE customerID = 1003
+
+UPDATE customers
+SET customer_status = 'Inactive'
+WHERE customerID = 1006
+
+UPDATE customers
+SET customer_status = 'Inactive'
+WHERE customerID= 1008
+
+
+
+UPDATE countries
+SET country_status = 'Challenging'
+WHERE countriesID = 2000
+
+UPDATE countries
+SET country_status = 'Challenging'
+WHERE countriesID = 2001
+
+UPDATE countries
+SET country_status = 'Moderate'
+WHERE countriesID = 2002
+
+UPDATE countries
+SET country_status = 'Challenging'
+WHERE countriesID= 2003
+
+UPDATE countries
+SET country_status = 'Moderate'
+WHERE countriesID = 2004
+
+UPDATE countries
+SET country_status = 'Challenging'
+WHERE countriesID= 2005
+
+UPDATE countries
+SET country_status = 'Moderate'
+WHERE countriesID = 2006
+
+
+
+UPDATE provinces
+SET province_status = 'Good'
+WHERE provinceID = 3004
+
+UPDATE provinces
+SET province_status = 'Good'
+WHERE provinceID = 3007
+ 
+UPDATE provinces
+SET province_status = 'Challenging'
+WHERE provinceID = 3008
+
+
+
+UPDATE cities
+SET city_status = 'Challenging'
+WHERE cityID = 4007
+
+UPDATE cities
+SET city_status = 'Challenging'
+WHERE cityID = 4008
+
+UPDATE cities
+SET city_status = 'Moderate'
+WHERE cityID = 4005
+
+UPDATE cities
+SET city_status = 'Challenging'
+WHERE cityID= 4009
+
+UPDATE cities
+SET city_status = 'Moderate'
+WHERE cityID = 4004
+
+UPDATE cities
+SET city_status = 'Challenging'
+WHERE cityID= 4003
+
+UPDATE cities
+SET city_status = 'Moderate'
+WHERE cityID = 4002
+
+
+/*ADDING CREATED_DATE FIELDNAME*/
+
+ALTER TABLE customers
+ADD created_date DATE 
+
+ALTER TABLE countries
+ADD countryregister_date DATE 
+
+ALTER TABLE provinces
+ADD provinceregister_date DATE 
+
+ALTER TABLE cities
+ADD cityregister_date DATE 
+
+
+
+/*UPDATING STATUS*/
+
+UPDATE customers
+SET created_date = '2001-08-23'
+WHERE customerID = 1000
+
+UPDATE customers
+SET created_date = '1994-05-03'
+WHERE customerID = 1001
+
+UPDATE customers
+SET created_date = '1992-10-16'
+WHERE customerID = 1002
+
+UPDATE customers
+SET created_date = '2003-02-26'
+WHERE customerID= 1003
+
+UPDATE customers
+SET created_date = '2012-12-12'
+WHERE customerID = 1004
+
+UPDATE customers
+SET created_date = '2014-12-09'
+WHERE customerID = 1005
+
+UPDATE customers
+SET created_date = '1985-11-04'
+WHERE customerID = 1006
+
+UPDATE customers
+SET created_date = '1980-07-16'
+WHERE customerID= 1007
+
+UPDATE customers
+SET created_date = '2008-04-15'
+WHERE customerID = 1008
+
+UPDATE customers
+SET created_date = '2002-01-19'
+WHERE customerID= 1009
+
+
+UPDATE countries
+SET countryregister_date = '1978-01-15'
+WHERE countriesID = 2000;
+
+UPDATE countries
+SET countryregister_date = '1964-07-14'
+WHERE countriesID = 2001;
+
+UPDATE countries
+SET countryregister_date = '1971-05-04'
+WHERE countriesID = 2002;
+
+UPDATE countries
+SET countryregister_date = '1983-10-10'
+WHERE countriesID = 2003;
+
+UPDATE countries
+SET countryregister_date = '1988-04-02'
+WHERE countriesID = 2004;
+
+UPDATE countries
+SET countryregister_date = '1990-03-03'
+WHERE countriesID = 2005;
+
+UPDATE countries
+SET countryregister_date = '1989-12-09'
+WHERE countriesID = 2006;
+
+UPDATE countries
+SET countryregister_date = '1976-04-07'
+WHERE countriesID = 2007;
+
+UPDATE countries
+SET countryregister_date = '1985-05-26'
+WHERE countriesID = 2008;
+
+UPDATE countries
+SET countryregister_date = '2000-06-28'
+WHERE countriesID = 2009;
+
+
+
+UPDATE provinces
+SET provinceregister_date = '1986-09-08'
+WHERE provinceID = 3004
+
+UPDATE provinces
+SET provinceregister_date = '2001-05-03'
+WHERE provinceID = 3007
+
+UPDATE provinces
+SET provinceregister_date = '1984-10-23'
+WHERE provinceID = 3008
+
+
+
+UPDATE cities
+SET cityregister_date = '1987-04-13'
+WHERE cityID = 4000
+
+UPDATE cities
+SET cityregister_date = '1980-11-25'
+WHERE cityID = 4001
+
+UPDATE cities
+SET cityregister_date = '1991-04-16'
+WHERE cityID = 4002
+
+UPDATE cities
+SET cityregister_date = '1993-08-30'
+WHERE cityID = 4003
+
+UPDATE cities
+SET cityregister_date = '1990-12-13'
+WHERE cityID = 4004
+
+UPDATE cities
+SET cityregister_date = '1975-01-26'
+WHERE cityID = 4005
+
+UPDATE cities
+SET cityregister_date = '2001-07-24'
+WHERE cityID = 4006
+
+UPDATE cities
+SET cityregister_date = '1979-03-28'
+WHERE cityID = 4007
+
+UPDATE cities
+SET cityregister_date = '1965-02-18'
+WHERE cityID = 4008
+
+UPDATE cities
+SET cityregister_date = '1984-04-22'
+WHERE cityID = 4009
+
+
+/****************************************************************************************/
+
+
+/* 3-Table Join between Customers, Countries, and Provinces */
+
+
+SELECT customerID, Firstname AS Pangalan, Surname AS Apelyido, gender AS Kasarian, customer_status AS Estado_Ng_Mamimili,country_status AS Estado_Ng_Bansa, province_status AS Estado_Ng_Probinsya, countryregister_date AS Petsa_Ng_Rehistro
+FROM countries
+INNER JOIN customers 
+ON countries.countriesID = customers.countriesID
+INNER JOIN provinces
+ON countries.countriesid = provinces.countriesid
+WHERE customer_status = 'Active' AND country_status = 'Good' 
+
+
+
+SELECT customerID, Firstname AS Pangalan, Surname AS Apelyido, gender AS Kasarian, customer_status AS Estado_Ng_Mamimili,country_status AS Estado_Ng_Bansa, city_status AS Estado_Ng_Bayan, countryregister_date AS Petsa_Ng_Rehistro
+FROM countries
+INNER JOIN customers 
+ON countries.countriesID = customers.countriesID
+INNER JOIN cities
+ON countries.countriesid = cities.countriesid
+WHERE customer_status = 'Inactive' AND country_status = 'Moderate' 
+
+
+SELECT customerID, Firstname AS Pangalan, Surname AS Apelyido, gender AS Kasarian, customer_status AS Estado_Ng_Mamimili,country_status AS Estado_Ng_Bansa, city_status AS Estado_Ng_Bayan, countryregister_date AS Petsa_Ng_Rehistro
+FROM countries
+INNER JOIN customers 
+ON countries.countriesID = customers.countriesID
+INNER JOIN cities
+ON countries.countriesid = cities.countriesid
+WHERE customer_status = 'Active' AND country_status = 'Challenging' AND Firstname LIKE '%L%'
+
+
+SELECT customerID, Firstname AS Pangalan, Surname AS Apelyido, gender AS Kasarian, customer_status AS Estado_Ng_Mamimili,country_status AS Estado_Ng_Bansa, city_status AS Estado_Ng_Bayan, countryregister_date AS Petsa_Ng_Rehistro
+FROM countries
+INNER JOIN customers 
+ON countries.countriesID = customers.countriesID
+INNER JOIN cities
+ON countries.countriesid = cities.countriesid
+WHERE country_status = 'Challenging' AND countryregister_date <= '2000-01-01' 
+
+
+SELECT customerID, Firstname AS Pangalan, Surname AS Apelyido, gender AS Kasarian, customer_status AS Estado_Ng_Mamimili,country_status AS Estado_Ng_Bansa, city_status AS Estado_Ng_Bayan, countryregister_date AS Petsa_Ng_Rehistro
+FROM countries
+LEFT JOIN customers 
+ON countries.countriesID = customers.countriesID
+LEFT JOIN cities
+ON countries.countriesid = cities.countriesid
+WHERE countryregister_date >= '1980-01-01' AND gender = 'Male' 
+
+
+SELECT customerID, Firstname AS Pangalan, Surname AS Apelyido, gender AS Kasarian, customer_status AS Estado_Ng_Mamimili,country_status AS Estado_Ng_Bansa, city_status AS Estado_Ng_Bayan, cityregister_date AS Petsa_Ng_Rehistro
+FROM countries
+LEFT JOIN customers 
+ON countries.countriesID = customers.countriesID
+LEFT JOIN cities
+ON countries.countriesid = cities.countriesid
+WHERE cityregister_date >= '1970-01-01' AND Surname LIKE '%A%'
+ORDER BY CUSTOMERID
+
+
+SELECT customerID, Firstname AS Pangalan, Surname AS Apelyido, gender AS Kasarian, customer_status AS Estado_Ng_Mamimili,country_status AS Estado_Ng_Bansa, city_status AS Estado_Ng_Bayan, cityregister_date AS Petsa_Ng_Rehistro
+FROM countries
+LEFT JOIN customers 
+ON countries.countriesID = customers.countriesID
+LEFT JOIN cities
+ON countries.countriesid = cities.countriesid
+WHERE cityregister_date BETWEEN'1970-01-01' AND '1980-01-01' AND Surname LIKE '%O%'
