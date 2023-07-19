@@ -8,3 +8,6 @@ Russia   MODERATE
 Belgium  GOOD
 Germany  GOOD
 Spain    GOOD
+
+
+Tokyo 	Moderate
